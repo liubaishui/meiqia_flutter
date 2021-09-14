@@ -69,6 +69,11 @@ public class SwiftMeiqiaFlutterPlugin: NSObject, FlutterPlugin {
             MQManager.closeMeiqiaService()
         case "openMeiqiaService":
             MQManager.openMeiqiaService()
+        case "getUnreadCount":
+            MQManager.getUnreadMessages {
+                        (messages, error) in
+                result(messages?.count)
+                    }
         default:
             result(FlutterMethodNotImplemented)
         }

@@ -5,10 +5,7 @@ import android.content.Intent
 import androidx.annotation.NonNull
 import com.meiqia.core.MQManager
 import com.meiqia.core.bean.MQMessage
-import com.meiqia.core.callback.OnClientInfoCallback
-import com.meiqia.core.callback.OnEndConversationCallback
-import com.meiqia.core.callback.OnInitCallback
-import com.meiqia.core.callback.OnMessageSendCallback
+import com.meiqia.core.callback.*
 import com.meiqia.meiqiasdk.activity.MQMessageFormActivity
 import com.meiqia.meiqiasdk.util.MQConfig
 import com.meiqia.meiqiasdk.util.MQIntentBuilder
@@ -106,6 +103,19 @@ class MeiqiaFlutterPlugin: FlutterPlugin, MethodCallHandler {
             MQManager.getInstance(context).setClientInfo(clientInfo, callback)
           }
           result.success(null)
+        }
+        //获取未读数量
+        "getUnreadCount" -> {
+          val callback = object : OnGetMessageListCallback {
+            override fun onSuccess(p0: MutableList<MQMessage>) {
+              result.success(p0.size)
+            }
+
+            override fun onFailure(p0: Int, p1: String) {
+              Log.e(TAG, p1)
+            }
+          }
+          MQManager.getInstance(context).getUnreadMessages(callback)
         }
         //发送消息
         "sendTxtMessage" -> {

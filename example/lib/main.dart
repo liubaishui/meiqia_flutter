@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:meiqia_flutter/meiqia_flutter.dart';
 
@@ -29,11 +28,21 @@ class _MyAppState extends State<MyApp> {
           title: const Text('Plugin example app'),
         ),
         body: Center(
-          child: ElevatedButton(
-            onPressed: () {
-              MeiqiaFlutter.chat(customId: "1234564");
-            },
-            child: Text("test"),
+          child: Column(
+            children: [
+              ElevatedButton(
+                onPressed: () {
+                  MeiqiaFlutter.chat(customId: "1234564");
+                },
+                child: Text("test"),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  MeiqiaFlutter.getUnreadMessageCount();
+                },
+                child: Text("get count"),
+              ),
+            ],
           ),
         ),
       ),

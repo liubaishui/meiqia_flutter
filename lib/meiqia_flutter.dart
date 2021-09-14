@@ -45,8 +45,16 @@ class MeiqiaFlutter {
   }
 
   ///设置或更新顾客列表
-  static Future<void> setClientInfo(Map<String, dynamic> clientInfo, {bool update: true}) async {
-    await _channel.invokeMethod('setClientInfo', {"clientInfo": clientInfo, "update": update});
+  static Future<void> setClientInfo(Map<String, dynamic> clientInfo,
+      {bool update: true}) async {
+    await _channel.invokeMethod(
+        'setClientInfo', {"clientInfo": clientInfo, "update": update});
+  }
+
+  /// 获取未读消息列表
+  static Future<int> getUnreadMessageCount() async {
+    var ret = await _channel.invokeMethod('getUnreadCount');
+    return ret;
   }
 
   /// 开启客服
